@@ -2,7 +2,6 @@ package logger
 
 import (
 	"io"
-	"log"
 	"path"
 
 	"github.com/go-mach/machinery/pkg/config"
@@ -44,11 +43,8 @@ var conf config.Log
 func NewLogger(configuration *config.Log) Logger {
 	if loggerInstance == nil {
 		loggerInstance = logrus.New()
-		log.Println("CECKING configuration log != nil")
 		if configuration != nil {
-			log.Println("configuration log != nil")
 			conf = *configuration
-			log.Printf("conf: %v", conf)
 			// file log with rotation
 			rfh, err := rotatefilehook.NewRotateFileHook(rotatefilehook.RotateFileConfig{
 				Filename:   path.Join(conf.Path, conf.Filename),
@@ -72,7 +68,6 @@ func NewLogger(configuration *config.Log) Logger {
 				loggerInstance.SetFormatter(consoleFormatter())
 			}
 		} else {
-			log.Println("configuration log == nil")
 			// default logger
 			Formatter := new(logrus.TextFormatter)
 			Formatter.TimestampFormat = "02-01-2006 15:04:05"
