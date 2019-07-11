@@ -2,6 +2,7 @@ package logger
 
 import (
 	"io"
+	"log"
 	"path"
 
 	"github.com/go-mach/machinery/pkg/config"
@@ -45,6 +46,7 @@ func NewLogger(configuration *config.Log) Logger {
 		loggerInstance = logrus.New()
 		if configuration != nil {
 			conf = *configuration
+			log.Printf("CONFIGURATION: %v", conf)
 			// file log with rotation
 			rfh, err := rotatefilehook.NewRotateFileHook(rotatefilehook.RotateFileConfig{
 				Filename:   path.Join(conf.Path, conf.Filename),
