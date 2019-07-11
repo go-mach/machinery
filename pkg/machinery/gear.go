@@ -1,4 +1,4 @@
-package gm
+package machinery
 
 // Configurable is the interface to mark a gear as configurable
 type Configurable interface {

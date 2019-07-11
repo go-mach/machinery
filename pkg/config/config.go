@@ -98,12 +98,14 @@ type (
 	}
 
 	// Configuration describe the type for the configuration file
+	// Log "required" is used for side-effect check: if err != nil => use default logger.
+	// Then we go by convention: if Log exists then we assert its mandatory fields exixsts.
 	Configuration struct {
 		Service    Service
 		API        API
 		DB         DB
 		Management Management
-		Log        Log
+		Log        Log `validate:"required"`
 		Ldap       Ldap
 	}
 )

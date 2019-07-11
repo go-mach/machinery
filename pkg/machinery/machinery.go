@@ -1,4 +1,4 @@
-package gm
+package machinery
 
 import (
 	"fmt"
@@ -8,23 +8,25 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/go-mach/gm/config"
+	"github.com/go-mach/machinery/pkg/logger"
+
+	"github.com/go-mach/machinery/pkg/config"
 )
 
 // Machinery is the main framework structure.
 type Machinery struct {
 	gears        map[string]Gear
 	GracefulStop chan os.Signal
-	Logger       Logger
+	Logger       logger.Logger
 }
 
 // NewMachinery initialize and return the main Machinery engine instance.
 func NewMachinery() *Machinery {
-	logger := NewLogger()
+	theLogger := logger.NewLogger(&config.GetConfiguration().Log)
 	theGoMachinery := &Machinery{
 		gears:        make(map[string]Gear),
 		GracefulStop: make(chan os.Signal),
-		Logger:       logger,
+		Logger:       theLogger,
 	}
 
 	signal.Notify(theGoMachinery.GracefulStop, syscall.SIGTERM)
@@ -32,14 +34,14 @@ func NewMachinery() *Machinery {
 
 	go func() {
 		sig := <-theGoMachinery.GracefulStop
-		logger.Printf("caught sig: %+v", sig)
+		theLogger.Printf("caught sig: %+v", sig)
 
-		logger.Println("Wait for 2 second to finish processing")
+		theLogger.Println("Wait for 2 second to finish processing")
 		time.Sleep(2 * time.Second)
 
 		theGoMachinery.Shutdown()
-		logger.Println("All gears went down. Shutting down the Machinery.")
-		logger.Println("Bye!")
+		theLogger.Println("All gears went down. Shutting down the Machinery.")
+		theLogger.Println("Bye!")
 		os.Exit(0)
 	}()
 
