@@ -2,7 +2,6 @@ package logger
 
 import (
 	"io"
-	"log"
 	"path"
 
 	"github.com/go-mach/machinery/pkg/config"
@@ -41,12 +40,12 @@ var loggerInstance *logrus.Logger
 var conf config.Log
 
 // NewLogger returns the logger instance. Initialize the instance only once.
-func NewLogger(configuration *config.Log) Logger {
+func NewLogger(configuration config.Log) Logger {
+	conf = configuration
+
 	if loggerInstance == nil {
 		loggerInstance = logrus.New()
-		if configuration != nil {
-			conf = *configuration
-			log.Printf("CONFIGURATION: %v", conf)
+		if config.IsSet("log") {
 			// file log with rotation
 			rfh, err := rotatefilehook.NewRotateFileHook(rotatefilehook.RotateFileConfig{
 				Filename:   path.Join(conf.Path, conf.Filename),

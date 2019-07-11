@@ -22,7 +22,7 @@ type Machinery struct {
 
 // NewMachinery initialize and return the main Machinery engine instance.
 func NewMachinery() *Machinery {
-	theLogger := logger.NewLogger(&config.GetConfiguration().Log)
+	theLogger := logger.NewLogger(config.GetConfiguration().Log)
 	theGoMachinery := &Machinery{
 		gears:        make(map[string]Gear),
 		GracefulStop: make(chan os.Signal),
