@@ -47,7 +47,7 @@ func NewLogger(configuration *config.Log) Logger {
 		log.Println("CECKING configuration log != nil")
 		if configuration != nil {
 			log.Println("configuration log != nil")
-			conf := *configuration
+			conf = *configuration
 			log.Printf("conf: %v", conf)
 			// file log with rotation
 			rfh, err := rotatefilehook.NewRotateFileHook(rotatefilehook.RotateFileConfig{
