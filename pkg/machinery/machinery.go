@@ -2,6 +2,7 @@ package machinery
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"os/signal"
 	"strings"
@@ -22,6 +23,7 @@ type Machinery struct {
 
 // NewMachinery initialize and return the main Machinery engine instance.
 func NewMachinery() *Machinery {
+	log.Printf("CONFIGURATION: %v", config.GetConfiguration())
 	theLogger := logger.NewLogger(&config.GetConfiguration().Log)
 	theGoMachinery := &Machinery{
 		gears:        make(map[string]Gear),
