@@ -18,10 +18,12 @@ type Machinery struct {
 	gears        map[string]Gear
 	GracefulStop chan os.Signal
 	Logger       logger.Logger
+	c            string
 }
 
 // NewMachinery initialize and return the main Machinery engine instance.
 func NewMachinery() *Machinery {
+	// create the Machinery
 	theLogger := logger.NewLogger(config.GetConfiguration().Log)
 	theGoMachinery := &Machinery{
 		gears:        make(map[string]Gear),
@@ -29,9 +31,11 @@ func NewMachinery() *Machinery {
 		Logger:       theLogger,
 	}
 
+	// set up os signal notifications
 	signal.Notify(theGoMachinery.GracefulStop, syscall.SIGTERM)
 	signal.Notify(theGoMachinery.GracefulStop, syscall.SIGINT)
 
+	// start a go-func to trigger os signals and gently shutdown the Machinery
 	go func() {
 		sig := <-theGoMachinery.GracefulStop
 		theLogger.Printf("caught sig: %+v", sig)
