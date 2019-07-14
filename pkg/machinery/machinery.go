@@ -52,7 +52,7 @@ func NewMachinery() *Machinery {
 	return theGoMachinery
 }
 
-// With configure one or more Gears with the Machinery engine.
+// With register one or more Gears with the Machinery engine.
 func (m *Machinery) With(gears ...Gear) *Machinery {
 	var gearName string
 
