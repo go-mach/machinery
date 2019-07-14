@@ -52,7 +52,7 @@ func NewMachinery() *Machinery {
 	return theGoMachinery
 }
 
-// With and configure one or more Gears with the Machinery engine.
+// With configure one or more Gears with the Machinery engine.
 func (m *Machinery) With(gears ...Gear) *Machinery {
 	var gearName string
 
@@ -69,7 +69,7 @@ func (m *Machinery) With(gears ...Gear) *Machinery {
 	return m
 }
 
-// Start configure app gears and starts the machinery
+// Start starts up the Machinery.
 func (m *Machinery) Start() {
 	m.Logger.Println("configuring machinery gears")
 	m.configureGears()
@@ -90,7 +90,7 @@ func (m *Machinery) Shutdown() {
 	}
 }
 
-// configure configurable gears
+// configure configurable gears.
 func (m *Machinery) configureGears() {
 	for gearName, gear := range m.gears {
 		// check if the gear is Configurable
@@ -105,6 +105,7 @@ func (m *Machinery) configureGears() {
 	}
 }
 
+// starts all the configured gears.
 func (m *Machinery) startGears() {
 	for gearName, gear := range m.gears {
 		m.Logger.Printf("starting the %s gear", gearName)
@@ -113,7 +114,6 @@ func (m *Machinery) startGears() {
 }
 
 // GetGear returns a Gear instance pointer
-// TODO: use a map to store Gears
 func (m *Machinery) GetGear(name string) Gear {
 	return m.gears[name]
 }
