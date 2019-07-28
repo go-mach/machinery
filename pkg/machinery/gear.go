@@ -28,6 +28,11 @@ type ConfigurableGear struct {
 	Config map[string]interface{}
 }
 
+// Configure is a setter method to inject config structure in a ConfgiurableGear.
+func (cg ConfigurableGear) Configure(config interface{}) {
+	cg.Config = config.(map[string]interface{})
+}
+
 // Name is the default do nothing implementation for the Gear interface Name() func.
 func (bg BaseGear) Name() string {
 	return bg.UniqueName
