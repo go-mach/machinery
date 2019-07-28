@@ -11,10 +11,10 @@ type Configurable interface {
 // If a component want to be loaded into the app have to implemet this interface.
 type Gear interface {
 	Name() string
-	Start(*Machinery)
+	Start(machinery *Machinery)
 	Provide() interface{}
 	Shutdown()
-	SetLogger(logger.Logger)
+	SetLogger(logger logger.Logger)
 }
 
 // BaseGear is the Machinery most basic building block structure.
