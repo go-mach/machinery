@@ -15,7 +15,7 @@ import (
 
 // Machinery is the main framework structure.
 type Machinery struct {
-	gears        map[string]Gear
+	gears        map[string]interface{}
 	GracefulStop chan os.Signal
 	Logger       logger.Logger
 }
@@ -25,7 +25,7 @@ func NewMachinery() *Machinery {
 	// create the Machinery
 	theLogger := logger.NewLogger(config.GetConfiguration().Log)
 	theGoMachinery := &Machinery{
-		gears:        make(map[string]Gear),
+		gears:        make(map[string]interface{}),
 		GracefulStop: make(chan os.Signal),
 		Logger:       theLogger,
 	}
@@ -61,10 +61,9 @@ func (m *Machinery) With(gears ...Gear) *Machinery {
 			m.Logger.Printf("Gear %s already registered", gearName)
 		} else {
 			m.Logger.Printf("registering %s Gear", gearName)
-			if _, ok := gear.(*BaseGear); ok {
-				gear.(*BaseGear).Logger = m.Logger
-			}
-			m.gears[gearName] = gear
+			g := gear.(BaseGear)
+			g.Logger = &m.Logger
+			m.gears[gearName] = g
 		}
 	}
 
@@ -88,7 +87,9 @@ func (m *Machinery) Shutdown() {
 	m.Logger.Println("Shutting down the Machinery")
 	for gearName, gear := range m.gears {
 		m.Logger.Printf("shutting down the %s gear", gearName)
-		gear.Shutdown()
+		//gear.Shutdown()
+		g := gear.(BaseGear)
+		g.Shutdown()
 	}
 }
 
@@ -111,11 +112,13 @@ func (m *Machinery) configureGears() {
 func (m *Machinery) startGears() {
 	for gearName, gear := range m.gears {
 		m.Logger.Printf("starting the %s gear", gearName)
-		gear.Start(m)
+		// gear.Start(m)
+		g := gear.(BaseGear)
+		g.Start(m)
 	}
 }
 
 // GetGear returns a Gear instance pointer
-func (m *Machinery) GetGear(name string) Gear {
+func (m *Machinery) GetGear(name string) interface{} {
 	return m.gears[name]
 }
