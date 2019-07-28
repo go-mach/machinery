@@ -29,24 +29,24 @@ type ConfigurableGear struct {
 }
 
 // Name is the default do nothing implementation for the Gear interface Name() func.
-func (bg *BaseGear) Name() string {
+func (bg BaseGear) Name() string {
 	return bg.UniqueName
 }
 
 // Start is the default do nothing implementation for the Gear interface Start() func.
-func (bg *BaseGear) Start(machinery *Machinery) {
+func (bg BaseGear) Start(machinery *Machinery) {
 	// do nothing
 }
 
 // Provide is the default do nothing implementation for the Gear interface Provide() func.
 // NOTE that it returns a nil interface{}.
-func (bg *BaseGear) Provide() interface{} {
+func (bg BaseGear) Provide() interface{} {
 	// do nothing
 	return nil
 }
 
 // Shutdown is the default do nothing implementation for the Gear interface Shutdown() func.
-func (bg *BaseGear) Shutdown() {
+func (bg BaseGear) Shutdown() {
 	// do nothing
 }
 
