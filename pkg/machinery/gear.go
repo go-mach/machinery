@@ -1,5 +1,7 @@
 package machinery
 
+import "github.com/go-mach/machinery/pkg/logger"
+
 // Configurable is the interface to mark a gear as configurable
 type Configurable interface {
 	Configure(config interface{})
@@ -18,6 +20,7 @@ type Gear interface {
 // If a component want to be loaded into the app should derive from this.
 type BaseGear struct {
 	UniqueName string
+	Logger     logger.Logger
 }
 
 // ConfigurableGear is a BasicGear with a config map structure.

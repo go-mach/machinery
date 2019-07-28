@@ -18,7 +18,6 @@ type Machinery struct {
 	gears        map[string]Gear
 	GracefulStop chan os.Signal
 	Logger       logger.Logger
-	c            string
 }
 
 // NewMachinery initialize and return the main Machinery engine instance.
@@ -62,6 +61,9 @@ func (m *Machinery) With(gears ...Gear) *Machinery {
 			m.Logger.Printf("Gear %s already registered", gearName)
 		} else {
 			m.Logger.Printf("registering %s Gear", gearName)
+			if _, ok := gear.(*BaseGear); ok {
+				gear.(*BaseGear).Logger = m.Logger
+			}
 			m.gears[gearName] = gear
 		}
 	}
