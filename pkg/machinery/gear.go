@@ -29,7 +29,7 @@ type ConfigurableGear struct {
 }
 
 // Configure is a setter method to inject config structure in a ConfgiurableGear.
-func (cg ConfigurableGear) Configure(config interface{}) {
+func (cg *ConfigurableGear) Configure(config interface{}) {
 	cg.Config = config.(map[string]interface{})
 }
 
