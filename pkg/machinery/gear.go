@@ -20,7 +20,7 @@ type Gear interface {
 // If a component want to be loaded into the app should derive from this.
 type BaseGear struct {
 	UniqueName string
-	Logger     *logger.Logger
+	Logger     logger.Logger
 }
 
 // ConfigurableGear is a BasicGear with a config map structure.

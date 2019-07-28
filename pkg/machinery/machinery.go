@@ -62,7 +62,7 @@ func (m *Machinery) With(gears ...Gear) *Machinery {
 		} else {
 			m.Logger.Printf("registering %s Gear", gearName)
 			g := gear.(BaseGear)
-			g.Logger = &m.Logger
+			g.Logger = m.Logger
 			m.gears[gearName] = g
 		}
 	}
