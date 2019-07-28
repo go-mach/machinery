@@ -11,9 +11,10 @@ type Configurable interface {
 // If a component want to be loaded into the app have to implemet this interface.
 type Gear interface {
 	Name() string
-	Start(machinery *Machinery)
+	Start(*Machinery)
 	Provide() interface{}
 	Shutdown()
+	SetLogger(logger.Logger)
 }
 
 // BaseGear is the Machinery most basic building block structure.
@@ -56,6 +57,11 @@ func (bg BaseGear) Provide() interface{} {
 // Shutdown is the default do nothing implementation for the Gear interface Shutdown() func.
 func (bg BaseGear) Shutdown() {
 	// do nothing
+}
+
+// SetLogger for this Gear.
+func (bg BaseGear) SetLogger(logger logger.Logger) {
+	bg.Logger = logger
 }
 
 // NewBaseGear returns a new instance of BaseGear.
