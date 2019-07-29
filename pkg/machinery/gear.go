@@ -29,6 +29,11 @@ func (bg *BaseGear) Shutdown() {
 	bg.Logger.Printf("%s went down", bg.Uname)
 }
 
+// Start is the default do nothing implementation for the Gear interface Start() func.
+func (bg *BaseGear) Start(machinery *Machinery) {
+	bg.Logger.Warnf("Please, provide a Start() method implementation for the %s gear", bg.Uname)
+}
+
 // // Configurable is the interface to mark a gear as configurable
 // type Configurable interface {
 // 	Configure(config interface{})
