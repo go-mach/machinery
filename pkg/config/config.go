@@ -147,13 +147,13 @@ func loadConfiguration() {
 }
 
 // Get returns a configuration map by key. Used for custom or gear configurations.
-func Get(key string) interface{} {
+func Get(key string) map[string]interface{} {
 	// just in case!
 	conf := GetConfiguration()
 	if conf == nil {
 		panic("No configuration at all!")
 	}
-	return viper.Get(key)
+	return viper.Get(key).(map[string]interface{})
 }
 
 // IsSet checks to see if the key has been set in any of the data locations.
