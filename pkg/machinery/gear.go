@@ -38,9 +38,13 @@ func (bg *BaseGear) Start(machinery *Machinery) {
 
 // Provide is the default do nothing implementation for the Gear interface Provide() func.
 // NOTE that it returns a nil interface{}.
-func (bg BaseGear) Provide() interface{} {
-	// do nothing
+func (bg *BaseGear) Provide() interface{} {
 	return nil
+}
+
+// SetLogger default Logger setter method. It should remain not overridden in concrete gears.
+func (bg *BaseGear) SetLogger(logger logger.Logger) {
+	bg.Logger = logger
 }
 
 // // Configurable is the interface to mark a gear as configurable
