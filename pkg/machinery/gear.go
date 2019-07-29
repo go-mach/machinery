@@ -1,6 +1,10 @@
 package machinery
 
-import "github.com/go-mach/machinery/pkg/logger"
+import (
+	"fmt"
+
+	"github.com/go-mach/machinery/pkg/logger"
+)
 
 // Gear is the Machinery main building block interface.
 type Gear interface {
@@ -31,7 +35,7 @@ func (bg *BaseGear) Shutdown() {
 
 // Start is the default do nothing implementation for the Gear interface Start() func.
 func (bg *BaseGear) Start(machinery *Machinery) {
-	bg.Logger.Warnf("Please, provide a Start() method implementation for the %s gear", bg.Uname)
+	panic(fmt.Sprintf("Please, provide a Start() method implementation for the %s gear", bg.Uname))
 }
 
 // // Configurable is the interface to mark a gear as configurable
