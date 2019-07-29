@@ -116,7 +116,7 @@ func (m *Machinery) startGears() {
 }
 
 // GetGear returns a Gear instance pointer
-func (m *Machinery) GetGear(name string) *Gear {
+func (m *Machinery) GetGear(name string) interface{} {
 	gear := m.gears[name]
 	return &gear
 }
