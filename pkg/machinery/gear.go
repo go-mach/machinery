@@ -14,9 +14,9 @@ type Gear interface {
 
 // BaseGear .
 type BaseGear struct {
-	uname  string
-	config interface{}
-	logger logger.Logger
+	Uname  string
+	Config interface{}
+	Logger logger.Logger
 }
 
 // // Configurable is the interface to mark a gear as configurable
