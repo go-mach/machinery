@@ -12,7 +12,7 @@ type Configurable interface {
 type Gear interface {
 	Name() string
 	Start(machinery *Machinery)
-	Provide() interface{}
+	Provide() *interface{}
 	Shutdown()
 	SetLogger(logger logger.Logger)
 }
