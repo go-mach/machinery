@@ -24,6 +24,11 @@ func (bg *BaseGear) Name() string {
 	return bg.Uname
 }
 
+// Shutdown .
+func (bg *BaseGear) Shutdown() {
+	bg.Logger.Printf("%s went down", bg.Uname)
+}
+
 // // Configurable is the interface to mark a gear as configurable
 // type Configurable interface {
 // 	Configure(config interface{})
