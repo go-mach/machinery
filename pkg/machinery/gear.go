@@ -21,7 +21,6 @@ type Gear interface {
 // BaseGear .
 type BaseGear struct {
 	Uname  string
-	Config GearConfig
 	Logger logger.Logger
 }
 
@@ -52,8 +51,8 @@ func (bg *BaseGear) SetLogger(logger logger.Logger) {
 	bg.Logger = logger
 }
 
-// Configure default config setter method. It could be overridden
+// Configure default config setter method. It should be overridden
 // in concrete gears to work on config type.
 func (bg *BaseGear) Configure(config GearConfig) {
-	bg.Config = config
+	// do nothing
 }
