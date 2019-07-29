@@ -49,7 +49,7 @@ func (bg *BaseGear) Start(machinery *Machinery) {
 
 // Provide is the default do nothing implementation for the Gear interface Provide() func.
 // NOTE that it returns a nil interface{}.
-func (bg *BaseGear) Provide() interface{} {
+func (bg *BaseGear) Provide() *interface{} {
 	// do nothing
 	return nil
 }
