@@ -94,14 +94,15 @@ func (m *Machinery) Shutdown() {
 func (m *Machinery) configureGears() {
 	for gearName, gear := range m.gears {
 		// check if the gear is Configurable
-		if configurableGear, ok := gear.(Configurable); ok {
-			m.Logger.Printf("the %s gear is configurable", gearName)
-			gearConfig := config.Get(strings.ToLower(gearName))
-			if gearConfig == nil {
-				panic(fmt.Sprintf("no configuration found for gear %s", gearName))
-			}
-			configurableGear.Configure(config.Get(gearName))
+		//if configurableGear, ok := gear.(Configurable); ok {
+		m.Logger.Printf("the %s gear is configurable", gearName)
+		gearConfig := config.Get(strings.ToLower(gearName))
+		if gearConfig == nil {
+			panic(fmt.Sprintf("no configuration found for gear %s", gearName))
 		}
+		gear.Configure(config.Get(gearName))
+		//configurableGear.Configure(config.Get(gearName))
+		//}
 	}
 }
 
@@ -114,6 +115,7 @@ func (m *Machinery) startGears() {
 }
 
 // GetGear returns a Gear instance pointer
-func (m *Machinery) GetGear(name string) Gear {
-	return m.gears[name]
+func (m *Machinery) GetGear(name string) *Gear {
+	gear := m.gears[name]
+	return &gear
 }
