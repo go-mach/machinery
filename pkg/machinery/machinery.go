@@ -94,7 +94,6 @@ func (m *Machinery) Shutdown() {
 func (m *Machinery) configureGears() {
 	for gearName, gear := range m.gears {
 		// check if the gear is Configurable
-		//if configurableGear, ok := gear.(Configurable); ok {
 		m.Logger.Printf("the %s gear is configurable", gearName)
 		gearConfig := config.Get(strings.ToLower(gearName))
 		if gearConfig == nil {
@@ -102,8 +101,6 @@ func (m *Machinery) configureGears() {
 		}
 		m.Logger.Printf("found configuration for %s gear: %v", gearName, gearConfig)
 		gear.Configure(config.Get(gearName))
-		//configurableGear.Configure(config.Get(gearName))
-		//}
 	}
 }
 

@@ -6,7 +6,7 @@ import (
 
 // GearConfig is the map structure for the gear confiuration.
 // It will be ridden from the app config file and set by the Configure method.
-type GearConfig map[string]interface{}
+type GearConfig interface{}
 
 // Gear is the Machinery main building block interface.
 type Gear interface {
@@ -53,7 +53,7 @@ func (bg *BaseGear) SetLogger(logger logger.Logger) {
 }
 
 // Configure default config setter method. It could be overridden
-//in concrete gears to work on config type.
+// in concrete gears to work on config type.
 func (bg *BaseGear) Configure(config GearConfig) {
 	bg.Config = config
 }
