@@ -4,6 +4,10 @@ import (
 	"github.com/go-mach/machinery/pkg/logger"
 )
 
+// GearConfig is the map structure for the gear confiuration.
+// It will be ridden from the app config file and set by the Configure method.
+type GearConfig map[string]interface{}
+
 // Gear is the Machinery main building block interface.
 type Gear interface {
 	Name() string
@@ -11,13 +15,13 @@ type Gear interface {
 	Provide() interface{}
 	Shutdown()
 	SetLogger(logger logger.Logger)
-	Configure(config interface{})
+	Configure(config GearConfig)
 }
 
 // BaseGear .
 type BaseGear struct {
 	Uname  string
-	Config interface{}
+	Config GearConfig
 	Logger logger.Logger
 }
 
@@ -50,6 +54,6 @@ func (bg *BaseGear) SetLogger(logger logger.Logger) {
 
 // Configure default config setter method. It could be overridden
 //in concrete gears to work on config type.
-func (bg *BaseGear) Configure(config interface{}) {
+func (bg *BaseGear) Configure(config GearConfig) {
 	bg.Config = config
 }
