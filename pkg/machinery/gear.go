@@ -1,8 +1,6 @@
 package machinery
 
 import (
-	"fmt"
-
 	"github.com/go-mach/machinery/pkg/logger"
 )
 
@@ -35,7 +33,8 @@ func (bg *BaseGear) Shutdown() {
 
 // Start is the default do nothing implementation for the Gear interface Start() func.
 func (bg *BaseGear) Start(machinery *Machinery) {
-	panic(fmt.Sprintf("Please, provide a Start() method implementation for the %s gear", bg.Uname))
+	//panic(fmt.Sprintf("Please, provide a Start() method implementation for the %s gear", bg.Uname))
+	bg.Logger.Fatalf("Please, provide a Start() method implementation for the %s gear", bg.Uname)
 }
 
 // // Configurable is the interface to mark a gear as configurable
