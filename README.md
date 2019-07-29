@@ -2,4 +2,4 @@
 
 The Go Machinery main engine.
 
-THIS IS A DEV REPO. go-mach/gm IS REALLY NOT PRODUCTION READY!!!
+THIS IS A DEV REPO. go-mach/machinery IS REALLY NOT PRODUCTION READY!!!
