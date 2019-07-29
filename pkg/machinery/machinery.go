@@ -100,7 +100,7 @@ func (m *Machinery) configureGears() {
 			if gearConfig == nil {
 				panic(fmt.Sprintf("no configuration found for gear %s", gearName))
 			}
-			configurableGear.Configure(config.Get(gearName))
+			configurableGear.(ConfigurableGear).Configure(config.Get(gearName))
 		}
 	}
 }
