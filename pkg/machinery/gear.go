@@ -19,6 +19,11 @@ type BaseGear struct {
 	Logger logger.Logger
 }
 
+// Name .
+func (bg *BaseGear) Name() string {
+	return bg.Uname
+}
+
 // // Configurable is the interface to mark a gear as configurable
 // type Configurable interface {
 // 	Configure(config interface{})
