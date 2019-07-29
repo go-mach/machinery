@@ -33,8 +33,14 @@ func (bg *BaseGear) Shutdown() {
 
 // Start is the default do nothing implementation for the Gear interface Start() func.
 func (bg *BaseGear) Start(machinery *Machinery) {
-	//panic(fmt.Sprintf("Please, provide a Start() method implementation for the %s gear", bg.Uname))
 	bg.Logger.Fatalf("Please, provide a Start() method implementation for the %s gear", bg.Uname)
+}
+
+// Provide is the default do nothing implementation for the Gear interface Provide() func.
+// NOTE that it returns a nil interface{}.
+func (bg BaseGear) Provide() interface{} {
+	// do nothing
+	return nil
 }
 
 // // Configurable is the interface to mark a gear as configurable
